@@ -16,7 +16,7 @@ class Library3 {
     LocalDateTime dt = LocalDateTime.now();
 
     File f1 = new File(
-            "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\IssueBooks.txt");
+            "D:\\Library Management Project\\IssueBooks.txt");
 
     public void showAvailableBooks() {
         String file = null;
@@ -39,7 +39,7 @@ class Library3 {
         }
         try {
             File f = new File(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\"
+                    "D:\\Library Management Project\\All Books\\"
                             + file);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
@@ -60,7 +60,7 @@ class Library3 {
         String bknm = sc1.nextLine();
         try {
             File f2 = new File(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books2\\"
+                    "D:\\Library Management Project\\All Books2\\"
                             + genre);
             Scanner sc = new Scanner(f2);
             StringBuffer buffer = new StringBuffer();
@@ -104,7 +104,7 @@ class Library3 {
         String bknm1 = sc1.nextLine();
         try {
             File f3 = new File(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books2\\"
+                    "D:\\Library Management Project\\All Books2\\"
                             + genre1);
             Scanner sc3 = new Scanner(f3);
             Scanner sc4 = new Scanner(f1);
@@ -152,7 +152,7 @@ class Library3 {
         String gri = sc1.nextLine();
         File nwfile = new File("grievance.txt");
         try {
-            FileWriter fileWriter = new FileWriter("grievance.txt");
+            FileWriter fileWriter = new FileWriter(nwfile);
             fileWriter.write("Username:" + user + "\n");
             fileWriter.write(gri);
             fileWriter.close();
@@ -169,7 +169,7 @@ class Library3 {
         int choice = sc1.nextInt();
         if (choice == 1) {
             try (FileWriter f = new FileWriter(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\biography.txt",
+                    "D:\\Library Management Project\\All Books2\\biography.txt",
                     true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) {
                 System.out.println("Enter book name: ");
                 String b_name = sc2.nextLine();
@@ -182,7 +182,7 @@ class Library3 {
         } else if (choice == 2) {
 
             try (FileWriter f = new FileWriter(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\science and research.txt",
+                    "D:\\Library Management Project\\All Books2\\science and research.txt",
                     true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) {
                 System.out.println("Enter book name: ");
                 String b_name = sc2.nextLine();
@@ -194,7 +194,7 @@ class Library3 {
         } else if (choice == 3) {
 
             try (FileWriter f = new FileWriter(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\health and fitness.txt",
+                    "D:\\Library Management Project\\All Books2\\health and fitness.txt",
                     true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) {
                 System.out.println("Enter book name: ");
                 String b_name = sc2.nextLine();
@@ -206,7 +206,7 @@ class Library3 {
         } else if (choice == 4) {
 
             try (FileWriter f = new FileWriter(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\politics and law.txt",
+                    "D:\\Library Management Project\\All Books2\\politics and law.txt",
                     true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) {
                 System.out.println("Enter book name: ");
                 String b_name = sc2.nextLine();
@@ -218,7 +218,7 @@ class Library3 {
         } else if (choice == 5) {
 
             try (FileWriter f = new FileWriter(
-                    "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\All Books\\environment.txt",
+                    "D:\\Library Management Project\\All Books2\\environment.txt",
                     true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) {
                 System.out.println("Enter book name: ");
                 String b_name = sc2.nextLine();
@@ -232,6 +232,52 @@ class Library3 {
         }
     }
 
+    public void remove_book(){
+        String file1 = null;
+        System.out.println(
+            "Genres:\n1.Biography\n2.Science and Research\n3.Health and Fitness\n4.Politics and Law\n5.Environment");
+        System.out.print("\nEnter your Choice: ");
+        int choice1 = sc1.nextInt();
+        if (choice1 == 1) {
+            file1 = "biography.txt";
+        } else if (choice1 == 2) {
+            file1 = "science and research.txt";
+        } else if (choice1 == 3) {
+            file1 = "health and fitness.txt";
+        } else if (choice1 == 4) {
+            file1 = "politics and law.txt";
+        } else if (choice1 == 5) {
+            file1 = "environment.txt";
+        } else {
+            System.out.println("Invalid Choice.txt");
+        }
+        System.out.println("Enter the name of the book you want to remove.");
+        String rb_name = sc2.nextLine();
+        try {
+            File f3 = new File("D:\\Library Management Project\\All Books2\\"+ file1);
+            Scanner sc2 = new Scanner(f3);
+            StringBuffer buffer1 = new StringBuffer();
+            while (sc2.hasNextLine()) {
+                buffer1.append(sc2.nextLine() + System.lineSeparator());
+            }
+            String fileContents1 = buffer1.toString();
+            if (fileContents1.contains(rb_name)) {
+                fileContents1 = fileContents1.replaceFirst(rb_name, "");
+                fileContents1 = fileContents1.trim();
+                try {
+                    FileWriter fw2 = new FileWriter(f3);
+                    fw2.append(fileContents1);
+                    fw2.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Book doesn't exist");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 public class LibraryManagement3 {
@@ -241,7 +287,7 @@ public class LibraryManagement3 {
     public static int checkDetails(String username, String password) {
         boolean flag = false;
         File userlist = new File(
-                "C:\\Users\\RUTIKA\\.vscode\\.vscode\\official_github\\Library-Management-System\\LoginDetails.txt");
+                "D:\\Library Management Project\\LoginDetails.txt");
         try {
             Scanner sc5 = new Scanner(userlist);
             while (sc5.hasNextLine()) {
@@ -338,9 +384,13 @@ public class LibraryManagement3 {
                             onlineLibrary.add_book();
                             break;
                         case 3:
-                            // onlineLibrary.remove_book();
+                            onlineLibrary.remove_book();
+                            break;
                         case 4:
                             File myFile = new File("grievance.txt");
+                            if(myFile.length() == 0){
+                                System.out.println("No Grievance found");
+                            }
                             try {
                                 Scanner sc = new Scanner(myFile);
                                 while (sc.hasNextLine()) {

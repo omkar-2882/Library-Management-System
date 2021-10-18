@@ -1,0 +1,12 @@
+Name: Amol
+Phone(Amol): 8954212541
+Address(Amol): Khar, Mumbai
+Name: Kunal
+Phone(Kunal): 9652348512
+Address(Kunal): Jogeswari, Mumbai
+Name: Amit
+Phone(Amit): 7562489125
+Address(Amit): Bandra, Mumbai
+Name: girish
+Phone(girish): 4666224485
+Address(girish): sion, Mumbai

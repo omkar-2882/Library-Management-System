@@ -228,7 +228,7 @@ class Library3 {
                 i.printStackTrace();
             }
         } else {
-            System.out.println("Invalid Choice.txt");
+            System.out.println("Invalid Choice");
         }
     }
 
@@ -283,11 +283,10 @@ class Library3 {
 public class LibraryManagement3 {
     public static Scanner sc = new Scanner(System.in);
     public static Scanner sc1 = new Scanner(System.in);
-
+    public static File userlist = new File(
+                "D:\\Library Management Project\\LoginDetails.txt");
     public static int checkDetails(String username, String password) {
         boolean flag = false;
-        File userlist = new File(
-                "D:\\Library Management Project\\LoginDetails.txt");
         try {
             Scanner sc5 = new Scanner(userlist);
             while (sc5.hasNextLine()) {
@@ -309,13 +308,11 @@ public class LibraryManagement3 {
     }
 
     public static void main(String[] args) {
-
         Library3 onlineLibrary = new Library3();
 
         System.out.print("\033[H\033[2J");
         System.out.flush();
-        System.out
-                .println("\n*******************************Welcome to PVPPcoe Library*******************************");
+        System.out.println("\n*******************************Welcome to PVPPcoe Library*******************************");
         System.out.println("1. User Login");
         System.out.println("2. Admin Login");
         System.out.println("3. New user");
@@ -413,10 +410,41 @@ public class LibraryManagement3 {
 
                 }
 
+            case 3:
+                String name, ph_no, add,set_U,set_P;
+                System.out.println("Enter your Name: ");
+                name = sc.nextLine();
+                System.out.println("Enter your Phone No.: ");
+                ph_no = sc.nextLine();
+                System.out.println("Enter your Address: ");
+                add = sc.nextLine();
+                System.out.println("Set your Username: ");                
+                set_U = sc.nextLine();
+                System.out.println("Set your Password: ");
+                set_P = sc.nextLine();
+                File regfile = new File("D:\\Library Management Project\\Registered Users.txt");
+                try {
+                    FileWriter rfw = new FileWriter(regfile, true);
+                    rfw.append("Name: "+name+"\n"+"Phone"+"("+name+"): "+ph_no+"\n"+"Address"+"("+name+"): "+add+"\n");
+                    rfw.close();
+                    System.out.println("User Registered!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    FileWriter lfw = new FileWriter(userlist, true);
+                    lfw.append("\n"+set_U+" "+set_P);
+                    lfw.close();
+                    System.out.println("Username and Password saved!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                LibraryManagement3.main(args);
+                break;
             default:
+                System.out.println("Invalid Choice!");
                 break;
         }
-
     }
 }
 

@@ -283,12 +283,34 @@ class Library3 {
 public class LibraryManagement3 {
     public static Scanner sc = new Scanner(System.in);
     public static Scanner sc1 = new Scanner(System.in);
-    public static File userlist = new File(
-                "D:\\Library Management Project\\LoginDetails.txt");
+    public static File userlist = new File("D:\\Library Management Project\\LoginDetails.txt");
+    public static File adminlist = new File("D:\\Library Management Project\\AdLoginDetails.txt");
     public static int checkDetails(String username, String password) {
         boolean flag = false;
         try {
             Scanner sc5 = new Scanner(userlist);
+            while (sc5.hasNextLine()) {
+                String line = sc5.nextLine();
+                if (line.equals(username + " " + password)) {
+                    flag = true;
+                    break;
+                }
+            }
+            sc5.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (flag == true) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int checkDetails2(String username, String password) {
+        boolean flag = false;
+        try {
+            Scanner sc5 = new Scanner(adminlist);
             while (sc5.hasNextLine()) {
                 String line = sc5.nextLine();
                 if (line.equals(username + " " + password)) {
@@ -366,7 +388,7 @@ public class LibraryManagement3 {
                 String admin_name = sc.nextLine();
                 System.out.print("Enter password: ");
                 String a_password = sc.nextLine();
-                if (checkDetails(admin_name, a_password) == 0) {
+                if (checkDetails2(admin_name, a_password) == 0) {
                     System.out.println("Username or Password Incorrect!");
                     System.exit(0);
                 }

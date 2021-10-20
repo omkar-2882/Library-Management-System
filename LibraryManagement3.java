@@ -316,6 +316,7 @@ public class LibraryManagement3 {
         System.out.println("1. User Login");
         System.out.println("2. Admin Login");
         System.out.println("3. New user");
+        System.out.println("4. Exit");
         System.out.println("Enter your choice:");
         int num = sc1.nextInt();
         switch (num) {
@@ -352,8 +353,8 @@ public class LibraryManagement3 {
                             onlineLibrary.Grievance(username);
                             break;
                         case 5:
-                            sc.close();
-                            System.exit(0);
+                            LibraryManagement3.main(args);
+                            // System.exit(0);
                         default:
                             System.out.println("Enter Valid Choice");
                             break;
@@ -401,8 +402,8 @@ public class LibraryManagement3 {
 
                             break;
                         case 5:
-                            sc.close();
-                            System.exit(0);
+                            LibraryManagement3.main(args);
+                            // System.exit(0);
                             break;
                         default:
                             break;
@@ -441,6 +442,10 @@ public class LibraryManagement3 {
                 }
                 LibraryManagement3.main(args);
                 break;
+
+            case 4:
+                System.exit(0);
+
             default:
                 System.out.println("Invalid Choice!");
                 break;

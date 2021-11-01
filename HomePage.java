@@ -82,6 +82,10 @@ class Homeframe implements ActionListener{
                 frame.dispose();
                 new AdminLogin();
             }
+            if(e.getSource()==button3){
+                frame.dispose();
+                new NewUser();
+            }
         }
 }
 public class HomePage {

@@ -15,8 +15,8 @@ class Library3 {
     public String file;
     LocalDateTime dt = LocalDateTime.now();
 
-    File f1 = new File(
-            "D:\\Library Management Project\\IssueBooks.txt");
+    File f1 = new File("D:\\Library Management Project\\IssueBooks.txt");
+    File pbf = new File("D:\\Library Management Project\\Previous Books.txt");
 
     public void showAvailableBooks() {
         String file = null;
@@ -52,16 +52,31 @@ class Library3 {
     }
 
     public void issueBooks(String user) {
-        System.out.println("Enter the Genre of Books: ");
-        String genre = sc1.nextLine();
-        genre = genre.toLowerCase();
-        genre = genre.concat(".txt");
-        System.out.println("Enter the name of the book you want.");
+        Scanner in = new Scanner(System.in);
+        String genre = null;
+        System.out.println(
+                "Genres:\n1.Biography\n2.Science and Research\n3.Health and Fitness\n4.Politics and Law\n5.Environment");
+        System.out.print("\nEnter your Choice: ");
+        int choice = in.nextInt();
+        if (choice == 1) {
+            genre = "biography.txt";
+        } else if (choice == 2) {
+            genre = "science and research.txt";
+        } else if (choice == 3) {
+            genre = "health and fitness.txt";
+        } else if (choice == 4) {
+            genre = "politics and law.txt";
+        } else if (choice == 5) {
+            genre = "environment.txt";
+        } else {
+            System.out.println("Invalid Choice.txt");
+        }
+        int ind = genre.indexOf('.');
+        String ngenre = genre.substring(0,ind);
+        File f2 = new File("D:\\Library Management Project\\All Books2\\"+ genre);
+        System.out.println("\nEnter the name of the book you want: ");
         String bknm = sc1.nextLine();
         try {
-            File f2 = new File(
-                    "D:\\Library Management Project\\All Books2\\"
-                            + genre);
             Scanner sc = new Scanner(f2);
             StringBuffer buffer = new StringBuffer();
             while (sc.hasNextLine()) {
@@ -73,8 +88,11 @@ class Library3 {
                 fileContents = fileContents.replaceFirst(bknm, "sold");
                 try {
                     FileWriter fw1 = new FileWriter(f1, true);
-                    fw1.append("'" + bknm + "'" + " issued to " + user + "\n");
+                    FileWriter fw3 = new FileWriter(pbf, true);
+                    fw1.append("'" + bknm + "', " + ngenre + ": issued to " + user + "\n");
                     fw1.close();
+                    fw3.append("'" + bknm + "', " + ngenre + ": issued to " + user + "\n");
+                    fw3.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -95,17 +113,32 @@ class Library3 {
     }
 
     public void returnBooks(String user) {
-        System.out.println("Enter the Genre of Books: ");
-        String genre1 = sc1.nextLine();
-        genre1 = genre1.toLowerCase();
-        genre1 = genre1.concat(".txt");
-        System.out.println("Enter the name of the book you want to return.");
         Scanner sc1 = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
+        String genre1 = null;
+        System.out.println(
+                "Genres:\n1.Biography\n2.Science and Research\n3.Health and Fitness\n4.Politics and Law\n5.Environment");
+        System.out.print("\nEnter your Choice: ");
+        int choice = in.nextInt();
+        if (choice == 1) {
+            genre1 = "biography.txt";
+        } else if (choice == 2) {
+            genre1 = "science and research.txt";
+        } else if (choice == 3) {
+            genre1 = "health and fitness.txt";
+        } else if (choice == 4) {
+            genre1 = "politics and law.txt";
+        } else if (choice == 5) {
+            genre1 = "environment.txt";
+        } else {
+            System.out.println("Invalid Choice.txt");
+        }
+        int ind = genre1.indexOf('.');
+        String ngenre1 = genre1.substring(0,ind);
+        File f3 = new File("D:\\Library Management Project\\All Books2\\"+ genre1);
+        System.out.println("Enter the name of the book you want to return: ");
         String bknm1 = sc1.nextLine();
         try {
-            File f3 = new File(
-                    "D:\\Library Management Project\\All Books2\\"
-                            + genre1);
             Scanner sc3 = new Scanner(f3);
             Scanner sc4 = new Scanner(f1);
             StringBuffer buffer2 = new StringBuffer();
@@ -125,7 +158,7 @@ class Library3 {
 
             if (issueContents.contains(bknm1) && bookContents.contains("sold")) {
                 System.out.println("Thankyou for returning the book.");
-                issueContents = issueContents.replaceAll("'" + bknm1 + "'" + " issued to " + user, "");
+                issueContents = issueContents.replaceAll("'" + bknm1 + "', " + ngenre1 + ": issued to " + user, "");
                 bookContents = bookContents.replaceFirst("sold", bknm1);
                 try {
                     FileWriter fw3 = new FileWriter(f1);
@@ -140,6 +173,24 @@ class Library3 {
                     fw4.close();
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ShowPreviousBook(String user){
+        try {
+            Scanner sc = new Scanner(pbf);
+            int i = 1;
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if(line.contains(user)){
+                    int sp = line.indexOf(':');
+                    String first = line.substring(0, sp);
+                    System.out.println(i+". "+first);
+                    i++;
                 }
             }
         } catch (Exception e) {
@@ -355,7 +406,7 @@ public class LibraryManagement3 {
                 int choice = 0;
                 while (true) {
                     System.out.println(
-                            "\n1. List all Books\n2. Borrow Book\n3. Return\n4. Enquiry/Grievance\n5. log out.");
+                            "\n1. List all Books\n2. Borrow Book\n3. Return\n4. Enquiry/Grievance\n5. Show Previous Books\n6. log out.");
                     System.out.print("\tEnter your Choice : ");
                     Scanner sc = new Scanner(System.in);
 
@@ -375,8 +426,10 @@ public class LibraryManagement3 {
                             onlineLibrary.Grievance(username);
                             break;
                         case 5:
+                            onlineLibrary.ShowPreviousBook(username);
+                            break;
+                        case 6:
                             LibraryManagement3.main(args);
-                            // System.exit(0);
                         default:
                             System.out.println("Enter Valid Choice");
                             break;

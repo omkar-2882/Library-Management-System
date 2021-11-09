@@ -116,6 +116,7 @@ public class NewUser implements ActionListener {
         frame3.add(button);
         frame3.add(button1);
         frame3.getContentPane().setBackground(Color.yellow);
+        frame3.setLocationRelativeTo(null);
         frame3.setVisible(true);
     }
 

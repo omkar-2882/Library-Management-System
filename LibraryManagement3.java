@@ -12,7 +12,7 @@ import java.io.File;
 class Library3 {
     public static Scanner sc1 = new Scanner(System.in);
     public static Scanner sc2 = new Scanner(System.in);
-    public String file;
+    public String file,idt,rdt;
     LocalDateTime dt = LocalDateTime.now();
 
     File f1 = new File("D:\\Library Management Project\\IssueBooks.txt");
@@ -38,9 +38,7 @@ class Library3 {
             System.out.println("Invalid Choice.txt");
         }
         try {
-            File f = new File(
-                    "D:\\Library Management Project\\All Books\\"
-                            + file);
+            File f = new File("D:\\Library Management Project\\All Books\\"+ file);
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -84,14 +82,16 @@ class Library3 {
             }
             String fileContents = buffer.toString();
             if (fileContents.contains(bknm)) {
+                System.out.println("Enter Date of Issue: ");
+                idt = sc1.nextLine();
                 System.out.println("Book is issued to you. Please return it in time");
                 fileContents = fileContents.replaceFirst(bknm, "sold");
                 try {
                     FileWriter fw1 = new FileWriter(f1, true);
                     FileWriter fw3 = new FileWriter(pbf, true);
-                    fw1.append("'" + bknm + "', " + ngenre + ": issued to " + user + "\n");
+                    fw1.append("'" + bknm + "', " + ngenre + ": issued to " + user + " on " + idt + "\n");
                     fw1.close();
-                    fw3.append("'" + bknm + "', " + ngenre + ": issued to " + user + "\n");
+                    fw3.append("'" + bknm + "', " + ngenre + ": issued to " + user + " on " + idt + "\n");
                     fw3.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -141,39 +141,54 @@ class Library3 {
         try {
             Scanner sc3 = new Scanner(f3);
             Scanner sc4 = new Scanner(f1);
+            Scanner sc5 = new Scanner(pbf);
             StringBuffer buffer2 = new StringBuffer();
             StringBuffer buffer3 = new StringBuffer();
+            StringBuffer buffer4 = new StringBuffer();
 
             while (sc3.hasNextLine()) {
                 buffer2.append(sc3.nextLine() + System.lineSeparator());
             }
-
             while (sc4.hasNextLine()) {
                 buffer3.append(sc4.nextLine() + System.lineSeparator());
+            }
+            while (sc5.hasNextLine()) {
+                buffer4.append(sc5.nextLine() + System.lineSeparator());
             }
 
             String bookContents = buffer2.toString();
             String issueContents = buffer3.toString();
+            String prevContents = buffer4.toString();
             issueContents = issueContents.trim();
+            prevContents = prevContents.trim();
 
-            if (issueContents.contains(bknm1) && bookContents.contains("sold")) {
+            if (issueContents.contains(bknm1) && bookContents.contains("sold") && prevContents.contains(bknm1)) {
+                System.out.println("Enter Returning Date: ");
+                rdt = sc1.nextLine();
                 System.out.println("Thankyou for returning the book.");
-                issueContents = issueContents.replaceAll("'" + bknm1 + "', " + ngenre1 + ": issued to " + user, "");
+                issueContents = issueContents.replaceAll("'" + bknm1 + "', " + ngenre1 + ": issued to " + user + " on " + idt,"");
+                prevContents = prevContents.replaceAll("'" + bknm1 + "', " + ngenre1 + ": issued to " + user + " on " + idt,"'" + bknm1 + "', " + ngenre1 + ": issued to " + user + " on " + idt + " Returned on "+rdt+"\n");
                 bookContents = bookContents.replaceFirst("sold", bknm1);
                 try {
                     FileWriter fw3 = new FileWriter(f1);
-                    fw3.append(issueContents);
-                    fw3.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
                     FileWriter fw4 = new FileWriter(f3);
+                    FileWriter fw5 = new FileWriter(pbf);
+                    fw3.append(issueContents);
                     fw4.append(bookContents);
+                    fw5.append(prevContents);
+                    fw3.close();
                     fw4.close();
+                    fw5.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                // try {
+                //     FileWriter fw4 = new FileWriter(f3);
+                //     fw4.append(bookContents);
+                //     fw4.close();
+                // } catch (IOException e) {
+                //     e.printStackTrace();
+                // }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -336,6 +351,7 @@ public class LibraryManagement3 {
     public static Scanner sc1 = new Scanner(System.in);
     public static File userlist = new File("D:\\Library Management Project\\LoginDetails.txt");
     public static File adminlist = new File("D:\\Library Management Project\\AdLoginDetails.txt");
+    public static String username;
     public static int checkDetails(String username, String password) {
         boolean flag = false;
         try {
@@ -395,7 +411,7 @@ public class LibraryManagement3 {
         switch (num) {
             case 1:
                 System.out.print("Enter username: ");
-                String username = sc.nextLine();
+                username = sc.nextLine();
                 System.out.print("Enter password: ");
                 String password = sc.nextLine();
                 if (checkDetails(username, password) == 0) {

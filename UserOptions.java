@@ -26,11 +26,10 @@ public class UserOptions implements ActionListener {
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setSize(1500,750); 
         frame1.setLayout(null);
-        // frame1.setLayout(new FlowLayout(FlowLayout.CENTER,10,10)); 
     
         label = new JLabel();
         label.setBounds(300,90,800,200);
-        label.setText("User Login");
+        label.setText("User Options");
         label.setForeground(Color.red);
         label.setFont(new Font("Cascadia Code",Font.BOLD,40));
         label.setHorizontalAlignment(JLabel.CENTER);
@@ -41,30 +40,35 @@ public class UserOptions implements ActionListener {
         button1.setBackground(Color.yellow);
         button1.setForeground(Color.red);
         button1.setFocusable(false);
+        button1.addActionListener(this);
 
         button2 = new JButton("Borrow Book");
         button2.setFont(new Font("Cascadia Code",Font.BOLD,20));
         button2.setBackground(Color.yellow);
         button2.setForeground(Color.red); 
         button2.setFocusable(false);
+        button2.addActionListener(this);
 
         button3 = new JButton("Return Book");
         button3.setFont(new Font("Cascadia Code",Font.BOLD,20));
         button3.setBackground(Color.yellow);
         button3.setForeground(Color.red);
         button3.setFocusable(false);
+        button3.addActionListener(this);
 
         button4 = new JButton("Enquiry/Grievance");
         button4.setFont(new Font("Cascadia Code",Font.BOLD,20));
         button4.setBackground(Color.yellow);
         button4.setForeground(Color.red);
         button4.setFocusable(false);
+        button4.addActionListener(this);
 
         button5 = new JButton("Logout");
         button5.setFont(new Font("Cascadia Code",Font.BOLD,20));
         button5.setBackground(Color.yellow);
         button5.setForeground(Color.red);
         button5.setFocusable(false);
+        button5.addActionListener(this);
 
         panel = new JPanel();
         panel.setBounds(500, 200, 400, 400);
@@ -87,7 +91,24 @@ public class UserOptions implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==button1){
-                
+                frame1.dispose();
+                new ShowAllBooks();
+            }
+            if(e.getSource()==button2){
+                frame1.dispose();
+                new Allgenre();
+            }
+            if(e.getSource()==button3){
+                frame1.dispose();
+                new Allgenre2();
+            }
+            if(e.getSource()==button4){
+                frame1.dispose();
+                new Grievance();
+            }
+            if(e.getSource()==button5){
+                frame1.dispose();
+                new Homeframe();
             }
         }
 }

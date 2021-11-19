@@ -1,27 +1,27 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ShowPreviousBook extends JFrame implements ActionListener {
-    JFrame frame = new JFrame();
+    
+    JFrame frame2 = new JFrame();
     JLabel label = new JLabel();
     JLabel hlabel = new JLabel("Previous Issued Book");
     JButton hbutton = new JButton("Back");
-    public String fileContents = "";
-    ShowPreviousBook(){
-        frame.setSize(1385,750);
-        frame.setLayout(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    JPanel p;
+    ShowPreviousBook(Boolean flag){
 
         hbutton.setBounds(0,0,100,25);
         hbutton.setBackground(Color.red);
@@ -36,48 +36,62 @@ public class ShowPreviousBook extends JFrame implements ActionListener {
         hlabel.setHorizontalAlignment(JLabel.CENTER);
         hlabel.setVerticalAlignment(JLabel.TOP);
 
-        JPanel redPanel = new JPanel();
-        redPanel.setBackground(Color.white);
-        redPanel.setBounds(280, 100, 900, 400);
-        redPanel.setLayout(new FlowLayout());  
+        frame2 = new JFrame("Previous Issued Books"); 
+        frame2.setSize(1385,750); 
+        frame2.setLayout(new GridLayout());
+
+        Object[][] data = new String[0][5];
+        String[] column = {"Book Name","Genre","Issued to","Issue date","Return date"};
+        DefaultTableModel model = new DefaultTableModel(data,column);
 
         File myFile = new File("Previous Books.txt");
         if(myFile.length() == 0){
 
         }
-        fileContents = fileContents.concat("<html>");
-        try {
+        try{
             Scanner sc = new Scanner(myFile);
-            while (sc.hasNextLine()) {
+            for(int i=0;sc.hasNextLine();i++)
+            {
                 String line = sc.nextLine();
-                if(line.contains(UserLogin.uname))
-                    fileContents = fileContents.concat("==>" + line + "<br>");
+                int a = line.indexOf(",");
+                String bkn = line.substring(0, a);
+                int b = line.indexOf(":");
+                String gen = line.substring(a+1,b);
+                String u = line.substring(line.indexOf(" to")+4,line.indexOf("on")-1);
+                String isd = line.substring(line.indexOf(" on")+4,line.indexOf(" on")+12);
+                String rtd = line.substring(line.lastIndexOf(" "));
+                Object[] newrow = {bkn,gen,u,isd,rtd};
+                if(flag){
+                    if(line.contains("Omkar")){
+                        model.addRow(newrow);
+                    }
+                }
+                else{
+                    model.addRow(newrow);
+                }
             }
-            fileContents = fileContents.concat("</html>");
-            sc.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        label.setBounds(20,50,200,200);
-        label.setText(fileContents);
-        label.setFont(new Font("Cascadia Code",Font.BOLD,15));
-        label.setForeground(Color.red);
-        redPanel.add(label);
-        
-        frame.add(hbutton);
-        frame.add(redPanel);
-        frame.add(hlabel);
-        frame.getContentPane().setBackground(Color.yellow);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+
+
+        frame2.getContentPane().setBackground(Color.YELLOW);
+        JTable table = new JTable(model);
+        table.setBounds(0, 50, 1300, 750);
+        table.setBackground(Color.YELLOW);
+        table.setForeground(Color.red);
+        table.setFont(new Font("Cascadia Code",Font.BOLD,13));
+        frame2.add(new JScrollPane(table));
+        frame2.setLocationRelativeTo(null);
+        frame2.setVisible(true);
     }
     public static void main(String[] args) {
-        new ShowPreviousBook();
+        new ShowPreviousBook(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==hbutton){
-            frame.dispose();
+            frame2.dispose();
             new UserOptions();
         }        
     }

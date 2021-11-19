@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
-import java.io.File;
 
 
 public class AddBook implements ActionListener {
@@ -73,7 +72,7 @@ public class AddBook implements ActionListener {
         button1.addActionListener(this);
 
         frame3.add(hlabel);
-        frame3.add(userlabel);
+        frame3.add(userlabel);      
         frame3.add(hbutton);
         frame3.add(button);
         frame3.add(textField);

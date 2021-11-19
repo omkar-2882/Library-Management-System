@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 public class AdminLogin implements ActionListener {
 
-    JFrame frame3 = new JFrame();
+    JFrame frame3 = new JFrame("Admin Login");
     JLabel userlabel = new JLabel("Username");
     JLabel passlabel = new JLabel("Password");
     JLabel hlabel = new JLabel("Admin Login");

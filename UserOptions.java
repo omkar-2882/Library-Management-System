@@ -4,8 +4,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -26,12 +29,15 @@ public class UserOptions implements ActionListener {
     JButton button6;
     JPanel panel;
     File f1 = new File("D:\\Library Management Project\\IssueBooks.txt");
+    public int f = 0;
 
     UserOptions(){
-
+        
         LocalDateTime dt = LocalDateTime.now();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/LL/yy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/LL/yy");
         String time = dt.format(df);
+        long diff = 0;
         try {
             Scanner sc = new Scanner(f1);
             while (sc.hasNextLine()) {
@@ -39,10 +45,24 @@ public class UserOptions implements ActionListener {
                 if(line.contains(UserLogin.uname)){
                     int i = line.indexOf('/');
                     int j = line.indexOf(',');
-                    String idt2 = line.substring(i-1);
+                    String idt2 = line.substring(i-2);
                     String bk = line.substring(0,j);
-                    JOptionPane.showMessageDialog(null, "Please return "+bk+" book in time that issued to you on "+idt2, "Gentle Reminder", JOptionPane.PLAIN_MESSAGE);
+                    try {
+                        Date d1 = sdf.parse(idt2);
+                        Date d2 = sdf.parse(time);
+                        if(idt2.equals(time)) {
+                            int f = 1;}
+                        diff = ((d2.getTime() - d1.getTime())/(1000*60*60*24))%365;
+                    } catch (ParseException e) { 
+                        e.printStackTrace();
+                    }
+                    if(diff<=5)
+                        JOptionPane.showMessageDialog(null, "Please return "+bk+" book in time\nthat issued to you on "+idt2+" "+(5-diff)+" days remaining.", "Gentle Reminder", JOptionPane.PLAIN_MESSAGE);
+                    else if(diff>5 && f!=1)
+                        JOptionPane.showMessageDialog(null, "Due Date exceeded,\nYou have to pay fine else your account will be blocked", "Gentle Reminder", JOptionPane.WARNING_MESSAGE);
+
                 }
+
             }
         } catch (Exception e3) {
             e3.printStackTrace();
@@ -82,7 +102,7 @@ public class UserOptions implements ActionListener {
         button3.setFocusable(false);
         button3.addActionListener(this);
 
-        button4 = new JButton("Enquiry/Grievance");
+        button4 = new JButton("Enquiry/Grievance/Request");
         button4.setFont(new Font("Cascadia Code",Font.BOLD,20));
         button4.setBackground(Color.yellow);
         button4.setForeground(Color.red);
@@ -126,7 +146,7 @@ public class UserOptions implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==button1){
                 frame1.dispose();
-                new ShowAllBooks();
+                new ShowAllBooks(true);
             }
             if(e.getSource()==button2){
                 frame1.dispose();
@@ -145,8 +165,8 @@ public class UserOptions implements ActionListener {
                 new Homeframe();
             }
             if(e.getSource()==button6){
-                frame1.dispose();
-                new ShowPreviousBook();
+                // frame1.dispose();
+                new ShowPreviousBook(true);
             }
         }
         public static void main(String[] args) {

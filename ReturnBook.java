@@ -110,7 +110,7 @@ public class ReturnBook implements ActionListener {
                     String line = sc.nextLine();
                     if(line.contains(user) && line.contains(bname)){
                         int i = line.indexOf('/');
-                        idt1 = line.substring(i-1);
+                        idt1 = line.substring(i-2);
                     }
                 }
             } catch (Exception e3) {
@@ -162,6 +162,7 @@ public class ReturnBook implements ActionListener {
                     }
                     JOptionPane.showMessageDialog(null, "Thankyou for returning the book, Keep Reading", null, JOptionPane.PLAIN_MESSAGE);
                 }
+                
             } catch (Exception e2) {
                 e2.printStackTrace();
             }

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class ShowUserGrievance extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
     JLabel label = new JLabel();
-    JLabel hlabel = new JLabel("User Grievances");
+    JLabel hlabel = new JLabel("User Grievances/Request");
     JButton hbutton = new JButton("Back");
     public String fileContents = "";
     ShowUserGrievance(){
@@ -29,7 +29,7 @@ public class ShowUserGrievance extends JFrame implements ActionListener {
         hbutton.setFocusable(false);
         hbutton.addActionListener(this);
 
-        hlabel.setBounds(130,30,250,30);
+        hlabel.setBounds(58,30,400,30);
         hlabel.setFont(new Font("Cascadia Code",Font.BOLD,25));
         hlabel.setForeground(Color.red);
 

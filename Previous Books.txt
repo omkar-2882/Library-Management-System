@@ -1,5 +1,6 @@
-'politics', politics and law: issued to Omkar on 8/11/21 Returned on 8/11/21
-'the daily stoic', health and fitness: issued to Rohan on 8/11/21 Returned on 8/11/21
-'karl marx', biography: issued to Omkar on 8/11/21 Returned on 9/11/21
+'politics', politics and law: issued to Omkar on 08/11/21 Returned on 08/11/21
+'the daily stoic', health and fitness: issued to Rohan on 08/11/21 Returned on 09/11/21
+'karl marx', biography: issued to Omkar on 08/11/21 Returned on 09/11/21
 'blink', health and fitness: issued to Rohan on 9/11/21 Returned on 10/11/21
-'kant', biography: issued to Omkar on 08/11/21
+'joel fuhrman', health and fitness: issued to Omkar on 15/11/21 Returned on 16/11/21
+'hidden nature', environment: issued to Rohan on 15/11/21

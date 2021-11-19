@@ -34,18 +34,18 @@ public class UserLogin implements ActionListener {
         hlabel.setFont(new Font("Cascadia Code",Font.BOLD,25));
         hlabel.setForeground(Color.red);
 
-        userlabel.setBounds(80,100,90,25);
+        userlabel.setBounds(80,130,90,25);
         userlabel.setFont(new Font("Cascadia Code",Font.BOLD,15));
         userlabel.setForeground(Color.red);
  
-        passlabel.setBounds(80,150,90,25);
+        passlabel.setBounds(80,180,90,25);
         passlabel.setFont(new Font("Cascadia Code",Font.BOLD,15));
         passlabel.setForeground(Color.red);
 
-        textField.setBounds(200, 100, 200, 25);
+        textField.setBounds(200, 130, 200, 25);
         textField.setFont(new Font("Cascadia Code",Font.BOLD,15));
         textField.setForeground(Color.red);
-        passField.setBounds(200, 150, 200, 25);
+        passField.setBounds(200, 180, 200, 25);
         passField.setFont(new Font("Cascadia Code",Font.BOLD,15));
         passField.setForeground(Color.red);
 
@@ -56,14 +56,14 @@ public class UserLogin implements ActionListener {
         hbutton.setFocusable(false);
         hbutton.addActionListener(this);
 
-        button.setBounds(145,200,100,25);
+        button.setBounds(145,230,100,25);
         button.setBackground(Color.red);
         button.setForeground(Color.yellow);
         button.setFont(new Font("Cascadia Code",Font.BOLD,15));
         button.setFocusable(false);
         button.addActionListener(this);
 
-        button1.setBounds(255,200,100,25);
+        button1.setBounds(255,230,100,25);
         button1.setBackground(Color.red);
         button1.setForeground(Color.yellow);
         button1.setFont(new Font("Cascadia Code",Font.BOLD,15));
@@ -93,6 +93,8 @@ public class UserLogin implements ActionListener {
         if(e.getSource()==button){
             uname = textField.getText();
             String pass = passField.getText();
+            if(uname.equals("") || pass.equals("")) 
+                JOptionPane.showMessageDialog(null, "Please fill all fields!", "Empty Fields!", JOptionPane.ERROR_MESSAGE);
             if(LibraryManagement3.checkDetails(uname, pass) == 0){
                 JOptionPane.showMessageDialog(null, "Username or Password Incorrect!", "Login failed", JOptionPane.ERROR_MESSAGE);
             }
@@ -106,6 +108,9 @@ public class UserLogin implements ActionListener {
             frame3.dispose();
             new Homeframe();
         }
+    }
+    public static void main(String[] args) {
+        new UserLogin();
     }
 
 }

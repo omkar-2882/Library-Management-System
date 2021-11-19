@@ -22,12 +22,13 @@ public class AdminOptions implements ActionListener {
     JButton button3;
     JButton button4;
     JButton button5;
+    JButton button6;
     JPanel panel;
 
     AdminOptions() {
         frame1 = new JFrame();
-        frame1.setTitle("User Login");
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.setTitle("Admin Login");
+        // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame1.setSize(1380, 750);
         frame1.setLayout(null);
         // frame1.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
@@ -68,6 +69,13 @@ public class AdminOptions implements ActionListener {
         button4.setFocusable(false);
         button4.addActionListener(this);
 
+        button6 = new JButton("Show Previous Record");
+        button6.setFont(new Font("Cascadia Code", Font.BOLD, 20));
+        button6.setBackground(Color.yellow);
+        button6.setForeground(Color.red);
+        button6.setFocusable(false);
+        button6.addActionListener(this);
+
         button5 = new JButton("Logout");
         button5.setFont(new Font("Cascadia Code", Font.BOLD, 20));
         button5.setBackground(Color.yellow);
@@ -76,15 +84,16 @@ public class AdminOptions implements ActionListener {
         button5.addActionListener(this);
 
         panel = new JPanel();
-        panel.setBounds(500, 200, 400, 400);
+        panel.setBounds(500, 230, 400, 400);
         panel.setBackground(Color.white);
         panel.setLayout(null);
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 40));
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
 
         panel.add(button1);
         panel.add(button2);
         panel.add(button3);
         panel.add(button4);
+        panel.add(button6);
         panel.add(button5);
 
         frame1.add(label);
@@ -98,7 +107,7 @@ public class AdminOptions implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button1) {
             frame1.dispose();
-            new ShowAllBooks();
+            new ShowAllBooks(false);
         }
         if (e.getSource() == button2) {
             frame1.dispose();
@@ -119,5 +128,12 @@ public class AdminOptions implements ActionListener {
             frame1.dispose();
             new Homeframe();
         }
+        if (e.getSource() == button6) {
+            // frame1.dispose();
+            new ShowPreviousBook(false);
+        }
+    }
+    public static void main(String[] args) {
+        new AdminOptions();
     }
 }

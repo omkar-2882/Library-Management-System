@@ -24,11 +24,13 @@ public class ShowAllBooks implements ActionListener {
     JButton button3;
     JButton button4;
     JButton button5;
-    JButton hbutton = new JButton("User Options");
+    JButton hbutton = new JButton("Back");
     JButton hbutton1 = new JButton("Admin Options");
     JPanel panel;
+    public Boolean flag1;
 
-    ShowAllBooks(){
+    ShowAllBooks(Boolean f){
+        flag1 = f;
         frame1 = new JFrame(); 
         frame1.setTitle("All Books");
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,7 +108,7 @@ public class ShowAllBooks implements ActionListener {
         panel.add(button5);
 
         frame1.add(hbutton);
-        frame1.add(hbutton1);
+        // frame1.add(hbutton1);
         frame1.add(label);
         frame1.add(panel);
         frame1.getContentPane().setBackground(Color.YELLOW);
@@ -116,12 +118,12 @@ public class ShowAllBooks implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==hbutton){
-                frame1.dispose();
-                new UserOptions();
-            }
-            if(e.getSource()==hbutton1){
-                frame1.dispose();
-                new AdminOptions();
+                if(flag1){
+                    frame1.dispose();
+                    new UserOptions();}
+                else{
+                    frame1.dispose();
+                    new AdminOptions();}
             }
             if(e.getSource()==button1){
                 new genre("biography.txt");
@@ -140,7 +142,7 @@ public class ShowAllBooks implements ActionListener {
             }
         }
     public static void main(String[] args) {
-        new ShowAllBooks();
+        new ShowAllBooks(true);
     }
 }
 class genre {

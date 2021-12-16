@@ -88,6 +88,7 @@ public class RemoveBook implements ActionListener {
         }
         if(e.getSource()==button){
             String rb_name = textField.getText();
+            rb_name = rb_name.toLowerCase();
             File f2 = new File("D:\\Library Management Project\\All Books2\\"+ genre);
             File f5 = new File("D:\\Library Management Project\\All Books\\"+ genre);
             try {
@@ -110,10 +111,10 @@ public class RemoveBook implements ActionListener {
                     fileContents2 = fileContents2.trim();
                     try {
                         FileWriter fw2 = new FileWriter(f5);
-                        fw2.append(fileContents1);
+                        fw2.append(fileContents1+"\n");
                         fw2.close();
                         FileWriter fw3 = new FileWriter(f2);
-                        fw3.append(fileContents2);
+                        fw3.append(fileContents2+"\n");
                         fw3.close();
                     } catch (IOException e1) {
                         e1.printStackTrace();

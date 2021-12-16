@@ -84,10 +84,10 @@ public class AdminOptions implements ActionListener {
         button5.addActionListener(this);
 
         panel = new JPanel();
-        panel.setBounds(500, 230, 400, 400);
+        panel.setBounds(500, 230, 400, 430);
         panel.setBackground(Color.white);
         panel.setLayout(null);
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 30));
 
         panel.add(button1);
         panel.add(button2);
@@ -112,10 +112,6 @@ public class AdminOptions implements ActionListener {
         if (e.getSource() == button2) {
             frame1.dispose();
             new Allgenre3();
-        }
-        if (e.getSource() == button3) {
-            frame1.dispose();
-            new Allgenre4();
         }
         if (e.getSource() == button3) {
             frame1.dispose();

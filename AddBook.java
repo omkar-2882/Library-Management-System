@@ -90,6 +90,7 @@ public class AddBook implements ActionListener {
         }
         if(e.getSource()==button){
             String bname = textField.getText();
+            bname = bname.toLowerCase();
             File f2 = new File("D:\\Library Management Project\\All Books2\\"+ genre);
             File f5 = new File("D:\\Library Management Project\\All Books\\"+ genre);
             try (FileWriter f = new FileWriter(f2,true); BufferedWriter b = new BufferedWriter(f); PrintWriter p = new PrintWriter(b);) 
